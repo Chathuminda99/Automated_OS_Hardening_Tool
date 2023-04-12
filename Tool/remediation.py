@@ -5,7 +5,7 @@ def call_files(filename):
     print(filename)
     # os.chmod(filename, 0o755)
     os.system("chmod +x " + filename)
-    os.system("cat " + filename)
+    os.system("bash " + filename)
 
 filename = 'test.sh'
 call_files(filename)
