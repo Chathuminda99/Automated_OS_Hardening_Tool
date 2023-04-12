@@ -27,7 +27,7 @@ number_of_data = len(data)
 
 # Introduction
 print("\nImporting CSV file: %s" %nessus_file)
-time.sleep(1)
+# time.sleep(1)
 print("\nImported Successfully")
 print("--------------------------------")
 
@@ -49,7 +49,7 @@ print("\n==>Host: " + hosts[0])
 
 print("\n--------------------------------")
 
-for row in data[:50]:
+for row in data[:3]:
     Plugin_ID = row['Plugin ID']
     Risk = row['Risk']
     Description = row['Description']
@@ -64,8 +64,8 @@ for row in data[:50]:
             if Risk == 'FAILED':
                 # Uncomment the following below line
                 # print(first_line)
-                # remediation_filename = comp_id + '.sh'
-                remediation_filename = 'test' + '.sh'
+                comp_id = 'test'
+                remediation_filename = comp_id + '.sh'
                 # print(remediation_filename)
                 call_files(remediation_filename)
             elif Risk == 'PASSED':
