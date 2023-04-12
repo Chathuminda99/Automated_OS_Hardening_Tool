@@ -4,6 +4,7 @@ import time
 import re
 import os
 from remediation import call_files
+# import remediation
 
 # variables
 id_pattern = re.compile(r'^\d+\.\d+(\.\d+)?(\.\d+)?') # Description ID pattern
@@ -27,7 +28,7 @@ number_of_data = len(data)
 
 # Introduction
 print("\nImporting CSV file: %s" %nessus_file)
-# time.sleep(1)
+time.sleep(1)
 print("\nImported Successfully")
 print("--------------------------------")
 
@@ -49,7 +50,7 @@ print("\n==>Host: " + hosts[0])
 
 print("\n--------------------------------")
 
-for row in data[:3]:
+for row in data[:50]:
     Plugin_ID = row['Plugin ID']
     Risk = row['Risk']
     Description = row['Description']
@@ -64,19 +65,15 @@ for row in data[:3]:
             if Risk == 'FAILED':
                 # Uncomment the following below line
                 # print(first_line)
-                comp_id = 'test'
+                comp_id = 'test' #remove this line for execute script files
                 remediation_filename = comp_id + '.sh'
-                # print(remediation_filename)
                 call_files(remediation_filename)
             elif Risk == 'PASSED':
                 # Uncomment the following below line
                 # print(first_line + "\n")
                 pass
             else:
-                print(first_line)
-                print("Warning => Could not verified")
-
-
-
-# print(data_count)
-# print(id_count)
+                # Uncomment Below Line 
+                # print(first_line)
+                # print("Warning => Could not verified")
+                pass
