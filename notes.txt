@@ -1,0 +1,69 @@
+Now in the 1.1.2.1 part
+
+eke ethule file ekkt line add karanna tiyenawa.
+
+echo >> gahala danna try karanna.
+GPT eke search karala ethi.
+Server ekaka kalin test karala inna.
+reboot erenna anit commands danna amthaka karanna epa.
+
+It seems like you want to ensure that the /tmp directory is correctly mounted with the appropriate options at boot time on your system. Here are the steps you can follow:
+
+Run the following command to unmask the tmp.mount unit if it's currently masked:
+Copy code
+systemctl unmask tmp.mount
+Modify the /etc/fstab file to include the tmpfs file system with the specific mount options that you require. You can use the following line as an example:
+arduino
+Copy code
+tmpfs /tmp tmpfs defaults,rw,nosuid,nodev,noexec,relatime,size=2G 0 0
+Make sure to adjust the options as per your specific requirements.
+
+Alternatively, you can create a tmp.mount file in the /etc/systemd/system directory and configure it with the specific mount options that you require. You can use the following example as a template:
+makefile
+Copy code
+[Unit]
+Description=Temporary Directory /tmp
+ConditionPathIsSymbolicLink=!/tmp
+DefaultDependencies=no
+Conflicts=umount.target
+Before=local-fs.target umount.target
+After=swap.target
+
+[Mount]
+What=tmpfs
+Where=/tmp
+Type=tmpfs
+Options=defaults,rw,nosuid,nodev,noexec,relatime,size=2G
+Again, make sure to adjust the options as per your specific requirements.
+
+Once you have made the necessary changes, reload the systemd daemon to ensure that the changes take effect:
+Copy code
+systemctl daemon-reload
+Reboot your system to verify that the /tmp directory is mounted with the appropriate options at boot time.
+
+
+
+Lasitha Bandara
+I want to know how to do 2 nd part?
+Sure! Here are the steps to modify the /etc/fstab file:
+
+Open the /etc/fstab file in a text editor with root privileges. For example, you can use the following command to open the file with the nano editor:
+bash
+Copy code
+sudo nano /etc/fstab
+Add the following line at the end of the file to configure the tmpfs file system with the specific mount options:
+arduino
+Copy code
+tmpfs /tmp tmpfs defaults,rw,nosuid,nodev,noexec,relatime,size=2G 0 0
+This line specifies the mount point (/tmp), the file system type (tmpfs), and the mount options (defaults,rw,nosuid,nodev,noexec,relatime,size=2G). Again, you can adjust the options as per your specific requirements.
+
+Save the changes to the /etc/fstab file and exit the text editor. In nano, you can press Ctrl+O to save the file and Ctrl+X to exit.
+
+To test the changes, you can either reboot your system or remount the /tmp directory manually by running the following command:
+
+bash
+Copy code
+sudo mount -o remount /tmp
+This will remount the /tmp directory with the new mount options specified in the /etc/fstab file.
+
+I hope this helps! Let me know if you have any further questions.
